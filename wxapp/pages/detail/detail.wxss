@@ -1,0 +1,23 @@
+.markdown-render-card {
+  margin-top: 18rpx;
+  padding: 28rpx 26rpx;
+}
+
+.detail-loading-card {
+  margin-top: 18rpx;
+}
+
+.provider-footer {
+  padding: 20rpx 0 10rpx;
+  text-align: center;
+}
+
+.provider-footer-text {
+  font-size: 22rpx;
+  line-height: 1.6;
+  color: #b3bebc;
+}
+
+.detail-bottom-anchor {
+  height: 1px;
+}

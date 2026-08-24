@@ -1,0 +1,6 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "markdown-view": "/components/markdown-view/markdown-view"
+  }
+}

@@ -1,0 +1,127 @@
+<view class="page-shell page-shell-home">
+  <view class="card hero-card">
+    <view class="hero-orb hero-orb-a"></view>
+    <view class="hero-orb hero-orb-b"></view>
+    <text class="hero-kicker">City Route Planner</text>
+    <text class="hero-title">从城市到路线，一次填完</text>
+    <text class="hero-desc">选择省市、出发时间、返程时间、人群和预算，下一页就开始实时生成你的专属路线。</text>
+    <view class="hero-tags">
+      <text class="pill hero-pill">省市直选</text>
+      <text class="pill hero-pill">时间更灵活</text>
+      <text class="pill hero-pill">路线实时生成</text>
+    </view>
+  </view>
+
+  <view class="shortcut-bar">
+    <button class="shortcut-strip shortcut-strip-history" bindtap="goHistory">
+      <text class="shortcut-strip-title">历史路线</text>
+      <text class="shortcut-strip-desc">回看已生成路线</text>
+    </button>
+    <button class="shortcut-strip shortcut-strip-favorite" bindtap="goFavorites">
+      <text class="shortcut-strip-title">收藏路线</text>
+      <text class="shortcut-strip-desc">快速进入常看攻略</text>
+    </button>
+  </view>
+
+  <view class="card form-card">
+    <view class="section-head">
+      <text class="section-title">出行条件</text>
+      <text class="section-tip">每人每日5次生成次数</text>
+    </view>
+
+    <view class="field">
+      <text class="field-label">目的地（省 / 市）</text>
+      <picker mode="multiSelector" range="{{cityColumns}}" value="{{pickerCityIndexes}}" bindchange="handleCityChange" bindcancel="handleCityCancel" bindcolumnchange="handleCityColumnChange">
+        <view class="field-box">
+          <text class="field-value">{{selectedProvinceName}} / {{selectedCityName}}</text>
+          <view class="field-side">
+            <view class="field-mini-spinner" wx:if="{{areaLoading}}"></view>
+            <text class="field-arrow">{{areaLoading ? '加载中' : '选择'}}</text>
+          </view>
+        </view>
+      </picker>
+    </view>
+
+    <view class="field-row">
+      <view class="field field-half">
+        <text class="field-label">出发日期</text>
+        <picker mode="date" start="{{minStartDate}}" value="{{startDate}}" bindchange="handleStartDateChange">
+          <view class="field-box">
+            <text class="field-value">{{startDate}}</text>
+            <text class="field-arrow">选择</text>
+          </view>
+        </picker>
+        <text class="field-tip">最长只能选择9天</text>
+      </view>
+      <view class="field field-half">
+        <text class="field-label">出发时间</text>
+        <picker mode="time" value="{{startTime}}" bindchange="handleStartTimeChange">
+          <view class="field-box">
+            <text class="field-value">{{startTime}}</text>
+            <text class="field-arrow">选择</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="field-row">
+      <view class="field field-half">
+        <text class="field-label">结束日期</text>
+        <picker mode="date" start="{{startDate}}" value="{{endDate}}" bindchange="handleEndDateChange">
+          <view class="field-box">
+            <text class="field-value">{{endDate}}</text>
+            <text class="field-arrow">选择</text>
+          </view>
+        </picker>
+      </view>
+      <view class="field field-half">
+        <text class="field-label">结束时间</text>
+        <picker mode="time" value="{{endTime}}" bindchange="handleEndTimeChange">
+          <view class="field-box">
+            <text class="field-value">{{endTime}}</text>
+            <text class="field-arrow">选择</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="field">
+      <text class="field-label">快捷时长</text>
+      <view class="quick-row">
+        <block wx:for="{{quickDurationOptions}}" wx:key="key">
+          <view class="quick-chip" data-key="{{item.key}}" bindtap="applyQuickDuration">{{item.label}}</view>
+        </block>
+      </view>
+    </view>
+
+    <view class="field-row">
+      <view class="field field-half">
+        <text class="field-label">出行人群</text>
+        <picker range="{{groupOptions}}" range-key="label" value="{{groupIndex}}" bindchange="handleGroupChange">
+          <view class="field-box">
+            <text class="field-value">{{groupOptions[groupIndex].label}}</text>
+            <text class="field-arrow">切换</text>
+          </view>
+        </picker>
+      </view>
+      <view class="field field-half">
+        <text class="field-label">预算档位</text>
+        <picker range="{{budgetOptions}}" range-key="label" value="{{budgetIndex}}" bindchange="handleBudgetChange">
+          <view class="field-box">
+            <text class="field-value">{{budgetOptions[budgetIndex].label}}</text>
+            <text class="field-arrow">切换</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <button class="button-primary submit-button" bindtap="generateRoute">开始生成路线</button>
+  </view>
+
+  <view class="page-mask" wx:if="{{pageTransitioning}}">
+    <view class="page-mask-card">
+      <view class="loading-spinner mask-spinner"></view>
+      <text class="page-mask-text">{{pageTransitionText}}</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,268 @@
+.page-shell-home {
+  padding-bottom: 56rpx;
+}
+
+.hero-card {
+  position: relative;
+  overflow: hidden;
+  padding: 30rpx 28rpx;
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 999rpx;
+}
+
+.hero-orb-a {
+  width: 220rpx;
+  height: 220rpx;
+  top: -90rpx;
+  right: -20rpx;
+  background: radial-gradient(circle, rgba(125, 211, 199, 0.88) 0%, rgba(125, 211, 199, 0.04) 72%);
+}
+
+.hero-orb-b {
+  width: 180rpx;
+  height: 180rpx;
+  right: 130rpx;
+  bottom: -70rpx;
+  border: 16rpx solid rgba(255, 184, 108, 0.24);
+}
+
+.hero-kicker,
+.hero-title,
+.hero-desc,
+.hero-tags {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-kicker {
+  display: inline-block;
+  padding: 10rpx 18rpx;
+  border-radius: 999rpx;
+  background: rgba(47, 158, 143, 0.12);
+  color: #2f9e8f;
+  font-size: 22rpx;
+}
+
+.hero-title {
+  display: block;
+  margin-top: 18rpx;
+  font-size: 46rpx;
+  font-weight: 700;
+  color: #163835;
+}
+
+.hero-desc {
+  display: block;
+  margin-top: 14rpx;
+  font-size: 25rpx;
+  line-height: 1.6;
+  color: #5d7e79;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 18rpx;
+}
+
+.hero-pill {
+  margin-right: 14rpx;
+  margin-bottom: 14rpx;
+}
+
+.form-card {
+  margin-top: 18rpx;
+  padding: 26rpx 24rpx;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16rpx;
+}
+
+.section-tip {
+  flex-shrink: 0;
+  max-width: 360rpx;
+  padding: 10rpx 16rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 184, 108, 0.16);
+  color: #a86400;
+  font-size: 20rpx;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.shortcut-bar {
+  display: flex;
+  gap: 14rpx;
+  margin-top: 18rpx;
+}
+
+.shortcut-strip {
+  flex: 1;
+  min-height: 132rpx;
+  padding: 0;
+  border: none;
+  border-radius: 24rpx;
+  text-align: left;
+  box-shadow: 0 14rpx 28rpx rgba(47, 158, 143, 0.08);
+}
+
+.shortcut-strip::after {
+  border: none;
+}
+
+.shortcut-strip-history {
+  background: linear-gradient(160deg, rgba(125, 211, 199, 0.26) 0%, rgba(125, 211, 199, 0.1) 100%);
+}
+
+.shortcut-strip-favorite {
+  background: linear-gradient(160deg, rgba(255, 215, 168, 0.34) 0%, rgba(255, 215, 168, 0.12) 100%);
+}
+
+.shortcut-strip-title,
+.shortcut-strip-desc {
+  display: block;
+  padding: 0 22rpx;
+}
+
+.shortcut-strip-title {
+  margin-top: 22rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #183b37;
+}
+
+.shortcut-strip-desc {
+  margin-top: 8rpx;
+  padding-bottom: 20rpx;
+  font-size: 22rpx;
+  line-height: 1.5;
+  color: #5f7c77;
+}
+
+.field {
+  margin-top: 16rpx;
+}
+
+.field-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.field-half {
+  width: calc(50% - 10rpx);
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 10rpx;
+  font-size: 23rpx;
+  color: #61827d;
+}
+
+.field-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 82rpx;
+  padding: 0 20rpx;
+  border-radius: 22rpx;
+  background: #f5fbfa;
+  border: 2rpx solid rgba(47, 158, 143, 0.08);
+}
+
+.field-value {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #1e3f3b;
+}
+
+.field-side {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.field-arrow {
+  font-size: 23rpx;
+  color: #7ba39d;
+}
+
+.field-mini-spinner {
+  width: 22rpx;
+  height: 22rpx;
+  border-radius: 999rpx;
+  border: 4rpx solid rgba(95, 183, 255, 0.18);
+  border-top-color: #53b3ff;
+  border-right-color: #2f9e8f;
+  animation: doc-spin 0.9s linear infinite;
+}
+
+.quick-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -14rpx;
+}
+
+.quick-chip {
+  margin-right: 14rpx;
+  margin-bottom: 12rpx;
+  padding: 12rpx 18rpx;
+  border-radius: 999rpx;
+  background: rgba(47, 158, 143, 0.1);
+  color: #2f9e8f;
+  font-size: 23rpx;
+}
+
+.submit-button {
+  margin-top: 18rpx;
+}
+
+.page-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(235, 244, 242, 0.56);
+  backdrop-filter: blur(6px);
+}
+
+.page-mask-card {
+  width: 300rpx;
+  padding: 30rpx 24rpx;
+  border-radius: 28rpx;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 24rpx 54rpx rgba(22, 56, 53, 0.14);
+}
+
+.mask-spinner {
+  width: 62rpx;
+  height: 62rpx;
+  border-width: 6rpx;
+}
+
+.page-mask-text {
+  display: block;
+  margin-top: 18rpx;
+  text-align: center;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: #486864;
+}
+
+.field-tip {
+  display: block;
+  margin-top: 10rpx;
+  padding-left: 8rpx;
+  font-size: 21rpx;
+  line-height: 1.5;
+  color: #95a7a2;
+}

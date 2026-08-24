@@ -1,0 +1,37 @@
+<view class="page-shell">
+  <view class="card list-card">
+    <text class="section-title">收藏路线</text>
+    <text class="section-subtitle">这里展示你已经收藏的路线内容，方便随时回看和对比。</text>
+  </view>
+
+  <block wx:if="{{list.length}}">
+    <block wx:for="{{list}}" wx:key="routeId">
+      <view class="card list-card" data-id="{{item.routeId}}" bindtap="openDetail">
+        <text class="list-title">{{item.city}}</text>
+        <text class="list-meta">{{item.startAt}} 至 {{item.endAt}}</text>
+        <view class="tag-wrap">
+          <text class="tag-chip spot">{{item.travelGroup}}</text>
+          <text class="tag-chip food">{{item.budgetLevel}}</text>
+          <text class="tag-chip tip">已收藏</text>
+        </view>
+        <text class="list-summary">{{item.summary}}</text>
+      </view>
+    </block>
+
+    <view class="list-footer" wx:if="{{loadingMore}}">
+      <text class="list-footer-text">加载中...</text>
+    </view>
+    <view class="list-footer" wx:if="{{loadFinished}}">
+      <text class="list-footer-text">---已到底部---</text>
+    </view>
+  </block>
+
+  <view wx:else class="card empty-card favorite-empty-card">
+    <view class="empty-illustration empty-illustration-favorite">
+      <view class="empty-illustration-ring"></view>
+      <view class="empty-illustration-dot"></view>
+    </view>
+    <text class="empty-title">还没有收藏路线</text>
+    <text class="empty-desc">在生成页或路线详情页点击收藏后，这里会立即展示你常用的路线内容。</text>
+  </view>
+</view>

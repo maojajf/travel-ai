@@ -1,0 +1,8 @@
+{
+  "description": "local private config",
+  "projectname": "travel-wxapp",
+  "setting": {
+    "compileHotReLoad": true,
+    "urlCheck": true
+  }
+}

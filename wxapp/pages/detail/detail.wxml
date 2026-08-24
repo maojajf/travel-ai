@@ -1,0 +1,76 @@
+<view class="page-shell page-shell-doc">
+  <view id="detail-top" class="detail-bottom-anchor"></view>
+
+  <view class="card route-hero-card" wx:if="{{detail || errorText}}">
+    <view class="route-hero-top">
+      <text class="route-status-pill is-done">{{headerInfo.statusText}}</text>
+      <text class="route-city-badge" wx:if="{{headerInfo.city}}">{{headerInfo.province}} {{headerInfo.city}}</text>
+    </view>
+    <text class="route-main-title">{{headerInfo.city ? headerInfo.city + ' 旅行路线文档' : '路线详情'}}</text>
+
+    <view class="route-meta-grid" wx:if="{{headerInfo.city}}">
+      <view class="route-meta-item">
+        <text class="route-meta-label">出发时间</text>
+        <text class="route-meta-value">{{headerInfo.startAt}}</text>
+      </view>
+      <view class="route-meta-item">
+        <text class="route-meta-label">结束时间</text>
+        <text class="route-meta-value">{{headerInfo.endAt}}</text>
+      </view>
+      <view class="route-meta-item">
+        <text class="route-meta-label">出行人群</text>
+        <text class="route-meta-value">{{headerInfo.travelGroupLabel}}</text>
+      </view>
+      <view class="route-meta-item">
+        <text class="route-meta-label">预算档位</text>
+        <text class="route-meta-value">{{headerInfo.budgetLabel}}</text>
+      </view>
+    </view>
+
+    <text class="route-summary" wx:if="{{headerInfo.summary}}">{{headerInfo.summary}}</text>
+    <text class="error-text" wx:if="{{errorText}}">{{errorText}}</text>
+  </view>
+
+  <view class="card loading-card detail-loading-card" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-title">正在加载路线详情</text>
+    <!-- <text class="loading-desc">稍后将直接展示保存下来的 Markdown 文档。</text> -->
+  </view>
+
+  <view class="card markdown-render-card" wx:if="{{markdownText}}">
+    <view class="doc-header">
+      <text class="doc-title">{{headerInfo.city ? headerInfo.city + ' 路线正文' : '路线正文'}}</text>
+      <text class="doc-badge">已完成</text>
+    </view>
+    <markdown-view markdown="{{markdownText}}" enableCollapse="{{true}}"></markdown-view>
+  </view>
+
+  <view class="provider-footer" wx:if="{{markdownText}}">
+    <text class="provider-footer-text">---该路线攻略由漫游助手提供---</text>
+  </view>
+
+  <view id="detail-bottom" class="detail-bottom-anchor"></view>
+
+  <view wx:if="{{detail}}">
+    <view class="fab-side-group fab-side-group-left">
+      <button wx:if="{{markdownText && !isNearBottom}}" class="fab-pill-button fab-pill-latest" bindtap="jumpToLatest">
+        <text class="fab-pill-icon">▼</text>
+        <text class="fab-pill-label">最新</text>
+      </button>
+      <button wx:if="{{markdownText && !isNearTop}}" class="fab-pill-button fab-pill-top" bindtap="jumpToTop">
+        <text class="fab-pill-icon">▲</text>
+        <text class="fab-pill-label">顶部</text>
+      </button>
+    </view>
+    <view class="fab-side-group fab-side-group-right">
+      <button wx:if="{{showRegenerate}}" class="fab-pill-button fab-pill-regenerate" bindtap="regenerate">
+        <text class="fab-pill-icon">↻</text>
+        <text class="fab-pill-label">重新生成</text>
+      </button>
+      <button wx:if="{{showFavoriteButton}}" class="fab-pill-button fab-pill-favorite {{detail.favorite ? 'is-active' : ''}}" bindtap="toggleFavorite">
+        <text class="fab-pill-icon">{{detail.favorite ? '★' : '☆'}}</text>
+        <text class="fab-pill-label">收藏路线</text>
+      </button>
+    </view>
+  </view>
+</view>

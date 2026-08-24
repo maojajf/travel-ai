@@ -1,0 +1,168 @@
+<view class="md-root">
+  <view class="md-theme-card" wx:if="{{document.theme}}">
+    <view class="md-theme-kicker">
+      <text class="md-theme-kicker-badge">主题</text>
+      <text class="md-theme-kicker-text">本次路线概览</text>
+    </view>
+    <view class="md-theme-title">
+      <block wx:for="{{document.theme.titleSegments}}" wx:key="key" wx:for-item="segment">
+        <text class="md-inline {{segment.className}}">{{segment.text}}</text>
+      </block>
+    </view>
+  </view>
+
+  <view class="md-overview-card" wx:if="{{document.overviewItems.length || document.overviewParagraphs.length}}">
+    <view class="md-section-top md-section-top-collapsible {{enableCollapse ? 'is-clickable' : ''}}" bindtap="toggleOverview">
+      <text class="md-section-badge is-overview">概览</text>
+      <text class="md-section-title">路线亮点</text>
+      <text class="md-fold-toggle" wx:if="{{enableCollapse}}">{{document.overviewExpanded ? '收起' : '展开'}}</text>
+    </view>
+
+    <view wx:if="{{document.overviewExpanded}}">
+      <block wx:for="{{document.overviewParagraphs}}" wx:key="key" wx:for-item="paragraph">
+        <view class="md-paragraph-line">
+          <block wx:for="{{paragraph.segments}}" wx:key="key" wx:for-item="segment">
+            <text class="md-inline {{segment.className}}">{{segment.text}}</text>
+          </block>
+        </view>
+      </block>
+
+      <view class="md-tag-list" wx:if="{{document.overviewItems.length}}">
+        <block wx:for="{{document.overviewItems}}" wx:key="key" wx:for-item="item">
+          <view wx:if="{{item.kind === 'semantic'}}" class="md-tag-item md-tone-{{item.tone}}">
+            <view class="md-tag-badge">{{item.badge}}</view>
+            <view class="md-tag-content">
+              <view class="md-tag-label">
+                <block wx:for="{{item.labelSegments}}" wx:key="key" wx:for-item="segment">
+                  <text class="md-inline {{segment.className}}">{{segment.text}}</text>
+                </block>
+              </view>
+              <view class="md-tag-value">
+                <block wx:for="{{item.valueSegments}}" wx:key="key" wx:for-item="segment">
+                  <text class="md-inline {{segment.className}}">{{segment.text}}</text>
+                </block>
+              </view>
+            </view>
+          </view>
+          <view wx:else class="md-generic-item">
+            <block wx:for="{{item.segments}}" wx:key="key" wx:for-item="segment">
+              <text class="md-inline {{segment.className}}">{{segment.text}}</text>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <block wx:for="{{document.sections}}" wx:key="key" wx:for-item="section">
+    <view class="md-section-card {{section.kind === 'reminder' ? 'is-reminder' : 'is-day'}}">
+      <view class="md-section-top md-section-top-collapsible {{enableCollapse ? 'is-clickable' : ''}}" data-key="{{section.key}}" bindtap="toggleSection">
+        <text class="md-section-badge {{section.kind === 'reminder' ? 'is-reminder' : 'is-day'}}">
+          {{section.kind === 'reminder' ? '提醒' : '行程'}}
+        </text>
+        <view class="md-section-title">
+          <block wx:for="{{section.titleSegments}}" wx:key="key" wx:for-item="segment">
+            <text class="md-inline {{segment.className}}">{{segment.text}}</text>
+          </block>
+        </view>
+        <text class="md-fold-toggle" wx:if="{{enableCollapse}}">{{section.expanded ? '收起' : '展开'}}</text>
+      </view>
+
+      <view wx:if="{{section.expanded}}">
+        <block wx:for="{{section.paragraphs}}" wx:key="key" wx:for-item="paragraph">
+          <view class="md-paragraph-line">
+            <block wx:for="{{paragraph.segments}}" wx:key="key" wx:for-item="segment">
+              <text class="md-inline {{segment.className}}">{{segment.text}}</text>
+            </block>
+          </view>
+        </block>
+
+        <view class="md-timeline" wx:if="{{section.slots.length}}">
+          <block wx:for="{{section.slots}}" wx:key="key" wx:for-item="slot">
+            <view class="md-timeline-item {{slot.isLast ? 'is-last' : ''}}">
+              <view class="md-timeline-axis">
+                <view class="md-timeline-dot"></view>
+                <view class="md-timeline-line"></view>
+              </view>
+              <view class="md-timeline-panel">
+                <view class="md-slot-top">
+                  <view class="md-time-chip">
+                    <block wx:for="{{slot.titleSegments}}" wx:key="key" wx:for-item="segment">
+                      <text class="md-inline {{segment.className}}">{{segment.text}}</text>
+                    </block>
+                  </view>
+                </view>
+
+                <block wx:for="{{slot.paragraphs}}" wx:key="key" wx:for-item="paragraph">
+                  <view class="md-paragraph-line">
+                    <block wx:for="{{paragraph.segments}}" wx:key="key" wx:for-item="segment">
+                      <text class="md-inline {{segment.className}}">{{segment.text}}</text>
+                    </block>
+                  </view>
+                </block>
+
+                <view class="md-tag-list" wx:if="{{slot.items.length}}">
+                  <block wx:for="{{slot.items}}" wx:key="key" wx:for-item="item">
+                    <view wx:if="{{item.kind === 'semantic'}}" class="md-tag-item md-tone-{{item.tone}}">
+                      <view class="md-tag-badge">{{item.badge}}</view>
+                      <view class="md-tag-content">
+                        <view class="md-tag-label">
+                          <block wx:for="{{item.labelSegments}}" wx:key="key" wx:for-item="segment">
+                            <text class="md-inline {{segment.className}}">{{segment.text}}</text>
+                          </block>
+                        </view>
+                        <view class="md-tag-value">
+                          <block wx:for="{{item.valueSegments}}" wx:key="key" wx:for-item="segment">
+                            <text class="md-inline {{segment.className}}">{{segment.text}}</text>
+                          </block>
+                        </view>
+                      </view>
+                    </view>
+                    <view wx:else class="md-generic-item">
+                      <block wx:for="{{item.segments}}" wx:key="key" wx:for-item="segment">
+                        <text class="md-inline {{segment.className}}">{{segment.text}}</text>
+                      </block>
+                    </view>
+                  </block>
+                </view>
+              </view>
+            </view>
+          </block>
+        </view>
+
+        <view class="md-tag-list" wx:if="{{section.items.length}}">
+          <block wx:for="{{section.items}}" wx:key="key" wx:for-item="item">
+            <view wx:if="{{item.kind === 'semantic'}}" class="md-tag-item md-tone-{{item.tone}}">
+              <view class="md-tag-badge">{{item.badge}}</view>
+              <view class="md-tag-content">
+                <view class="md-tag-label">
+                  <block wx:for="{{item.labelSegments}}" wx:key="key" wx:for-item="segment">
+                    <text class="md-inline {{segment.className}}">{{segment.text}}</text>
+                  </block>
+                </view>
+                <view class="md-tag-value">
+                  <block wx:for="{{item.valueSegments}}" wx:key="key" wx:for-item="segment">
+                    <text class="md-inline {{segment.className}}">{{segment.text}}</text>
+                  </block>
+                </view>
+              </view>
+            </view>
+            <view wx:else class="md-generic-item">
+              <block wx:for="{{item.segments}}" wx:key="key" wx:for-item="segment">
+                <text class="md-inline {{segment.className}}">{{segment.text}}</text>
+              </block>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <block wx:for="{{document.looseParagraphs}}" wx:key="key" wx:for-item="paragraph">
+    <view class="md-loose-card">
+      <block wx:for="{{paragraph.segments}}" wx:key="key" wx:for-item="segment">
+        <text class="md-inline {{segment.className}}">{{segment.text}}</text>
+      </block>
+    </view>
+  </block>
+</view>

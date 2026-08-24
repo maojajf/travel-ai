@@ -1,0 +1,65 @@
+.tag-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 18rpx;
+}
+
+.list-footer {
+  padding: 24rpx 0 8rpx;
+  text-align: center;
+}
+
+.list-footer-text {
+  font-size: 22rpx;
+  color: #b3bebc;
+}
+
+.empty-card {
+  margin-top: 24rpx;
+  padding: 44rpx 32rpx 40rpx;
+  text-align: center;
+}
+
+.history-empty-card {
+  padding: 52rpx 36rpx 46rpx;
+}
+
+.empty-illustration {
+  position: relative;
+  width: 136rpx;
+  height: 136rpx;
+  margin: 0 auto 24rpx;
+}
+
+.empty-illustration-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 999rpx;
+  background: radial-gradient(circle at 30% 30%, rgba(125, 211, 199, 0.34), rgba(125, 211, 199, 0.08) 62%, rgba(125, 211, 199, 0) 72%);
+  border: 2rpx solid rgba(47, 158, 143, 0.1);
+}
+
+.empty-illustration-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 34rpx;
+  height: 34rpx;
+  margin-left: -17rpx;
+  margin-top: -17rpx;
+  border-radius: 999rpx;
+  background: linear-gradient(135deg, #53b3ff 0%, #2f9e8f 100%);
+  box-shadow: 0 12rpx 24rpx rgba(47, 158, 143, 0.2);
+}
+
+.history-empty-card .empty-title {
+  font-size: 34rpx;
+}
+
+.history-empty-card .empty-desc {
+  max-width: 520rpx;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 16rpx;
+  line-height: 1.8;
+}

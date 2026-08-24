@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.backend.mapper.RouteRecordMapper">
+
+
+    <select id="listHistory" resultType="com.travel.backend.domain.vo.RouteListVo">
+        SELECT
+            id AS route_id,
+            province,
+            city,
+            summary,
+            travel_group ,
+            budget_level ,
+            start_at ,
+            end_at ,
+            created_at
+        FROM route_record
+        WHERE user_id = #{userId}
+        ORDER BY created_at DESC
+    </select>
+
+    <select id="listFavorites" resultType="com.travel.backend.domain.vo.RouteListVo">
+        SELECT
+            rr.id AS route_id,
+            rr.province,
+            rr.city,
+            rr.summary,
+            rr.travel_group ,
+            rr.budget_level ,
+            rr.start_at ,
+            rr.end_at ,
+            rr.created_at
+        FROM route_record rr, route_favorite as rf
+        WHERE rr.id  = rf.route_id  and rf.user_id = #{userId}
+        ORDER BY rf.created_at DESC
+    </select>
+</mapper>

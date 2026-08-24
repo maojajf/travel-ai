@@ -1,0 +1,119 @@
+<view class="page-shell page-shell-doc page-shell-scroll">
+  <view class="custom-nav" style="height: {{navBarHeight}}px; padding-top: {{navTop}}px;">
+    <button class="custom-nav-back" bindtap="handleBackTap">
+      <!-- <text class="custom-nav-back-icon">&lt;</text> -->
+      <text class="custom-nav-back-text">{{uiText.back}}</text>
+    </button>
+    <text class="custom-nav-title">{{uiText.navTitle}}</text>
+  </view>
+
+  <scroll-view
+    class="doc-scroll"
+    scroll-y
+    enhanced="{{true}}"
+    show-scrollbar="{{false}}"
+    scroll-into-view="{{scrollIntoView}}"
+    bindscroll="handleScroll"
+  >
+    <view class="doc-scroll-content">
+      <view id="doc-top" class="scroll-anchor"></view>
+      <view class="card route-hero-card">
+        <view class="route-hero-top">
+          <view class="route-status-wrap">
+            <text class="route-status-pill {{loading ? 'is-loading' : 'is-done'}}">{{headerInfo.statusText}}</text>
+            <view class="mini-spinner" wx:if="{{loading}}"></view>
+          </view>
+          <text class="route-city-badge" wx:if="{{headerInfo.city}}">{{headerInfo.province}} {{headerInfo.city}}</text>
+        </view>
+        <text class="route-main-title">{{headerInfo.city ? headerInfo.city + ' 旅行路线文档' : '旅行路线文档'}}</text>
+
+        <view class="route-meta-grid" wx:if="{{headerInfo.city}}">
+          <view class="route-meta-item">
+            <text class="route-meta-label">出发时间</text>
+            <text class="route-meta-value">{{headerInfo.startAt}}</text>
+          </view>
+          <view class="route-meta-item">
+            <text class="route-meta-label">结束时间</text>
+            <text class="route-meta-value">{{headerInfo.endAt}}</text>
+          </view>
+          <view class="route-meta-item">
+            <text class="route-meta-label">出行人群</text>
+            <text class="route-meta-value">{{headerInfo.travelGroupLabel}}</text>
+          </view>
+          <view class="route-meta-item">
+            <text class="route-meta-label">预算档位</text>
+            <text class="route-meta-value">{{headerInfo.budgetLabel}}</text>
+          </view>
+        </view>
+
+        <text class="route-summary" wx:if="{{headerInfo.summary}}">{{headerInfo.summary}}</text>
+        <text class="error-text" wx:if="{{errorText}}">{{errorText}}</text>
+      </view>
+
+      <view class="card stream-notice-card" wx:if="{{loading && !markdownText}}">
+        <view class="stream-notice-row">
+          <view class="loading-spinner mini"></view>
+          <view class="stream-notice-copy">
+            <text class="stream-notice-title">路线正在生成</text>
+            <!-- <text class="stream-notice-desc">当前是分批更新正文，先显示一个轻量加载提示。</text> -->
+          </view>
+        </view>
+      </view>
+
+      <view class="card markdown-render-card" wx:if="{{markdownText}}">
+        <view class="doc-header">
+          <text class="doc-title">{{headerInfo.city ? headerInfo.city + ' 路线正文' : '路线正文'}}</text>
+          <view class="doc-header-side">
+            <view class="mini-spinner subtle" wx:if="{{loading}}"></view>
+            <text class="doc-badge">{{loading ? '生成中' : '已完成'}}</text>
+          </view>
+        </view>
+        <markdown-view markdown="{{markdownText}}" enableCollapse="{{generationFinished}}"></markdown-view>
+      </view>
+
+      <view class="provider-footer" wx:if="{{generationFinished}}">
+        <text class="provider-footer-text">---该路线攻略由漫游助手提供---</text>
+      </view>
+
+      <view id="markdown-bottom" class="scroll-anchor"></view>
+    </view>
+  </scroll-view>
+
+  <view class="fab-side-group fab-side-group-left">
+    <button wx:if="{{markdownText && !isNearBottom}}" class="fab-pill-button fab-pill-latest" bindtap="jumpToLatest">
+      <text class="fab-pill-icon">▼</text>
+      <text class="fab-pill-label">最新</text>
+    </button>
+    <button wx:if="{{markdownText && !isNearTop}}" class="fab-pill-button fab-pill-top" bindtap="jumpToTop">
+      <text class="fab-pill-icon">▲</text>
+      <text class="fab-pill-label">顶部</text>
+    </button>
+  </view>
+  <view class="fab-side-group fab-side-group-right">
+    <button wx:if="{{generationFinished}}" class="fab-pill-button fab-pill-regenerate" bindtap="regenerate">
+      <text class="fab-pill-icon">↻</text>
+      <text class="fab-pill-label">重新生成</text>
+    </button>
+    <button wx:if="{{generationFinished && routeId}}" class="fab-pill-button fab-pill-favorite {{favorite ? 'is-active' : ''}}" bindtap="toggleFavorite">
+      <text class="fab-pill-icon">{{favorite ? '★' : '☆'}}</text>
+      <text class="fab-pill-label">收藏路线</text>
+    </button>
+  </view>
+
+  <view wx:if="{{leaveDialogVisible}}" class="dialog-mask" catchtap="hideLeaveDialog">
+    <view class="dialog-card" catchtap="noop">
+      <view class="dialog-badge-row">
+        <view class="dialog-badge-icon">!</view>
+        <text class="dialog-badge-text">生成中提醒</text>
+      </view>
+      <view class="dialog-copy">
+        <text class="dialog-title">{{uiText.leaveTitle}}</text>
+        <text class="dialog-subtitle">{{uiText.leaveDesc}}</text>
+      </view>
+      <view class="dialog-actions">
+        <button class="button-secondary dialog-button" bindtap="hideLeaveDialog">{{uiText.leaveStay}}</button>
+        <button class="button-primary dialog-button" bindtap="confirmLeave">{{uiText.leaveConfirm}}</button>
+      </view>
+    </view>
+  </view>
+</view>

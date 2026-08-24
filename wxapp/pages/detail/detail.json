@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "路线详情",
+  "usingComponents": {
+    "markdown-view": "/components/markdown-view/markdown-view"
+  }
+}

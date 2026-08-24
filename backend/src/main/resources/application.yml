@@ -1,0 +1,110 @@
+server:
+  port: 80
+  servlet:
+    # 应用的访问路径
+    context-path: /travel
+  tomcat:
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+    # 连接数满后的排队数，默认为100
+    accept-count: 1000
+    threads:
+      # tomcat最大线程数，默认为200
+      max: 800
+      # Tomcat启动初始化的线程数，默认值10
+      min-spare: 100
+
+spring:
+  application:
+    name: travel-backend
+  jackson:
+    time-zone: Asia/Shanghai
+  # 文件上传
+  servlet:
+    multipart:
+      # 单个文件大小
+      max-file-size: 500MB
+      # 设置总上传的文件大小
+      max-request-size: 500MB
+  datasource:
+    url: jdbc:mysql://120.79.29.252:3306/travel?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: sokmjf520
+  data:
+    redis:
+      host: 120.79.29.252
+      port: 6379
+      password: sokmjf520
+
+logging:
+  config: classpath:logback.xml
+  level:
+    root: INFO
+    com.travel.backend: INFO
+
+log:
+  path: /sdata/travel/logs
+
+# AI 配置
+ai:
+#  ikuncode 的配置
+#  base-url: https://api.ikuncode.cc/v1
+#  api-key: sk-zF905NW7UCf5oC7ACG3d4m3quo1SuIEKJQH0vRIeLiOLf1rK
+#  model: gpt-5.5
+#  komi 的配置
+#  base-url: https://komiai.cn/api/codex/v1
+#  api-key: sk-65fa2cd390f623ad20847a170a5edb40dbd2f616cf8747b8
+#  deepseek 的配置
+  base-url: https://api.deepseek.com
+  api-key: sk-68e23c9b97ed4d7f96018ea12a96b8a1
+  model: deepseek-v4-flash
+  temperature: 0.7
+  max-tokens: 2048
+  connect-timeout-seconds: 6000
+
+# MyBatis配置
+mybatis-plus:
+  # 搜索指定包别名
+  type-aliases-package: com.travel.backend.domain.model
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    lazy-loading-enabled: true
+    multiple-result-sets-enabled: true
+    use-generated-keys: true
+    default-statement-timeout: 60
+    default-fetch-size: 100
+
+# Springdoc配置
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  group-configs:
+    - group: 'travel-backend'   # API分组名称
+      paths-to-match: '/**'  # 匹配所有路径
+      packages-to-scan: com.travel.backend.controller
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+wx:
+  appid: wxdb0ea2c800e9e1d6
+  secret: 694210da254b71f14d70d6147e6870ba
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 200000
+        readTimeout: 200000

@@ -1,0 +1,9 @@
+target/
+.idea/
+*.iml
+*.log
+logPath_IS_UNDEFINED/
+.git/
+.gitignore
+Dockerfile
+README.md

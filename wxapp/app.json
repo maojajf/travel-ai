@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/generate/generate",
+    "pages/history/history",
+    "pages/favorites/favorites",
+    "pages/detail/detail"
+  ],
+  "window": {
+    "navigationBarTitleText": "城市漫游计划",
+    "navigationBarBackgroundColor": "#f7fffd",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#eefaf7",
+    "backgroundTextStyle": "light"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
